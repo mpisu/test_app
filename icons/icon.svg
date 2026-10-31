@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="gradBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="gradTrack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="50%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+    <linearGradient id="gradAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#gradBg)" stroke="#334155" stroke-width="6" />
+
+  <!-- Athletics Track Lanes (Oval Curves) -->
+  <g fill="none" stroke-linecap="round" opacity="0.85">
+    <!-- Lane 3 -->
+    <path d="M 120 330 C 120 390, 392 390, 392 330 L 392 200 C 392 140, 120 140, 120 200 Z" stroke="#334155" stroke-width="26" />
+    <!-- Lane 2 -->
+    <path d="M 155 330 C 155 370, 357 370, 357 330 L 357 200 C 357 160, 155 160, 155 200 Z" stroke="#475569" stroke-width="22" />
+    <!-- Lane 1 (Dynamic Orange/Red Track) -->
+    <path d="M 190 330 C 190 355, 322 355, 322 330 L 322 200 C 322 175, 190 175, 190 200 Z" stroke="url(#gradTrack)" stroke-width="20" filter="url(#glow)" />
+  </g>
+
+  <!-- Center Stopwatch & Lightning / Runner silhouette motif -->
+  <!-- Stopwatch crown & buttons -->
+  <rect x="238" y="70" width="36" height="30" rx="8" fill="#e2e8f0" />
+  <circle cx="256" cy="85" r="7" fill="#0f172a" />
+  <path d="M 330 100 L 350 116" stroke="#94a3b8" stroke-width="12" stroke-linecap="round" />
+
+  <!-- Outer Stopwatch Rim -->
+  <circle cx="256" cy="265" r="140" fill="#0f172a" stroke="url(#gradAccent)" stroke-width="12" />
+  
+  <!-- Dial ticks -->
+  <g stroke="#64748b" stroke-width="4" stroke-linecap="round">
+    <line x1="256" y1="138" x2="256" y2="152" />
+    <line x1="256" y1="378" x2="256" y2="392" />
+    <line x1="142" y1="265" x2="156" y2="265" />
+    <line x1="370" y1="265" x2="356" y2="265" />
+  </g>
+
+  <!-- Digital / Athletic Arrow & Hands -->
+  <path d="M 256 265 L 315 205" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+  <circle cx="256" cy="265" r="14" fill="#38bdf8" />
+  <circle cx="256" cy="265" r="6" fill="#ffffff" />
+
+  <!-- Modern Running Dynamic Bolt -->
+  <path d="M 252 200 L 225 255 L 260 255 L 235 320 L 290 250 L 255 250 Z" fill="#fbbf24" filter="url(#glow)" />
+</svg>

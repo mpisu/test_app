@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>TrackMaster - Atletica Leggera</title>
+
+  <!-- PWA & iOS Safari Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TrackMaster">
+  <meta name="theme-color" content="#090d16">
+  <meta name="description" content="App professionale per cronometraggio multi-corsia, allenamenti e gestione atleti di Atletica Leggera su iPhone e iPad.">
+
+  <!-- Manifest & Icons -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header Superiore -->
+    <header class="app-header">
+      <div class="brand" id="brand-header-home" style="cursor: pointer;" title="Torna alla Pagina Iniziale">
+        <img src="./icons/icon.svg" alt="TrackMaster" class="brand-icon">
+        <div>
+          <span class="brand-title">TrackMaster</span>
+          <span class="brand-badge">ATLETICA</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button id="btn-header-home" class="btn-icon-subtle" title="Torna alla Pagina Iniziale">
+          🏠 Inizio
+        </button>
+        <button id="btn-header-sheet" class="btn-icon-subtle" title="Apri Foglio Rapido">
+          📝 Foglio
+        </button>
+        <button id="btn-audio-toggle" class="btn-icon-subtle" title="Disattiva/Attiva Audio" aria-label="Audio">
+          🔊
+        </button>
+        <button id="btn-pwa-guide" class="btn-icon-subtle" title="Come installare su iPhone/iPad">
+          📲 Installa App
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenitore Principale -->
+    <main class="app-main">
+
+      <!-- ===================================================================
+           VISTA 0: PAGINA INIZIALE CON I DUE TASTI PRINCIPALI
+           =================================================================== -->
+      <section id="view-home" class="view-section active">
+
+        <!-- Banner di benvenuto / Home Hero -->
+        <div class="home-hero">
+          <div class="home-hero-badge">⚡ TRACKMASTER • ATLETICA LEGGERA FIDAL</div>
+          <h1 class="home-hero-title">Centro Tecnico di Allenamento</h1>
+          <p class="home-hero-subtitle">Seleziona la sessione di lavoro per oggi:</p>
+        </div>
+
+        <!-- I DUE TASTI PRINCIPALI (GRID INTERATTIVA) -->
+        <div class="home-session-grid">
+          
+          <!-- TASTO 1: SESSIONE DI ALLENAMENTO DI ATLETICA -->
+          <div class="home-card card-athletics" id="btn-go-athletics" role="button" tabindex="0">
+            <div class="home-card-badge-row">
+              <span class="home-pill pill-cyan">PISTA & CRONOMETRO</span>
+              <span class="home-pill pill-ghost">FIDAL</span>
+            </div>
+            
+            <div class="home-card-header">
+              <div class="home-card-icon-box icon-athletics">
+                🏃‍♂️
+              </div>
+              <div>
+                <h2 class="home-card-title">Sessione di Allenamento di Atletica</h2>
+                <span class="home-card-tagline">Pista, Cronometraggio, Ripetute & Starter FIDAL</span>
+              </div>
+            </div>
+
+            <p class="home-card-desc">
+              Accedi al cronometro professionale centesimale singolo e fino a 6 corsie simultanee per iPad, procedura ufficiale dello Starter FIDAL ("Ai vostri posti" → "Pronti" → Sparo), intertempi split lap con delta differenziale, timer recupero e programmi di corsa.
+            </p>
+
+            <ul class="home-card-features">
+              <li>⏱️ <strong>Crono Singolo & 6 Corsie</strong> con calcolo delta giro per giro</li>
+              <li>🔫 <strong>Procedura Starter FIDAL</strong> con sequenza acustica ufficiale</li>
+              <li>⏳ <strong>Timer Recupero Automatico</strong> programmabile tra serie e ripetute</li>
+              <li>📋 <strong>Schede & Programmi Pista</strong> (Velocità, Mezzofondo, Ostacoli)</li>
+              <li>👥 <strong>Database Atleti & Categorie</strong> FIDAL con record PB e SB</li>
+            </ul>
+
+            <button class="btn-home-action btn-athletics-action">
+              <span>▶ AVVIA ALLENAMENTO ATLETICA</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- TASTO 2: SESSIONE DI POTENZIAMENTO MUSCOLARE -->
+          <div class="home-card card-strength" id="btn-go-strength" role="button" tabindex="0">
+            <div class="home-card-badge-row">
+              <span class="home-pill pill-orange">FORZA & PLIOMETRIA</span>
+              <span class="home-pill pill-ghost">SPECIFICO ATLETICA</span>
+            </div>
+
+            <div class="home-card-header">
+              <div class="home-card-icon-box icon-strength">
+                🏋️‍♂️
+              </div>
+              <div>
+                <h2 class="home-card-title">Sessione di Potenziamento Muscolare</h2>
+                <span class="home-card-tagline">Forza Esplosiva, Catena Cinetica & Timer Pesi</span>
+              </div>
+            </div>
+
+            <p class="home-card-desc">
+              Sessione di potenziamento muscolare studiata specificamente per l'atletica leggera: schede tecniche per velocisti, saltatori, mezzofondisti e lanciatori, timer recupero serie, modalità EMOM e Tabata, calcolatore scientifico 1RM e diario carichi.
+            </p>
+
+            <ul class="home-card-features">
+              <li>⚡ <strong>Schede Specifiche</strong>: Velocità, Salti, Mezzofondo, Lanci & Prevenzione</li>
+              <li>⏱️ <strong>Timer Specializzati</strong>: Recupero Serie Pesi, EMOM & Tabata con audio</li>
+              <li>🎯 <strong>Calcolatore 1RM Scientifico</strong> con percentuali di carico (70% - 95%)</li>
+              <li>📝 <strong>Diario & Registro Carichi</strong> con cronologia, serie x reps e note</li>
+              <li>🛡️ <strong>Protocolli Prevenzione Infortuni</strong> (Nordic Hamstring, catena posteriore, core)</li>
+            </ul>
+
+            <button class="btn-home-action btn-strength-action">
+              <span>▶ AVVIA POTENZIAMENTO MUSCOLARE</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- TASTO 3: FOGLIO RAPIDO MINIMALE -->
+          <div class="home-card card-sheet" id="btn-go-sheet" role="button" tabindex="0">
+            <div class="home-card-badge-row">
+              <span class="home-pill pill-paper">FOGLIO BIANCO</span>
+              <span class="home-pill pill-ghost">TABELLA DINAMICA</span>
+            </div>
+            
+            <div class="home-card-header">
+              <div class="home-card-icon-box icon-sheet">
+                📝
+              </div>
+              <div>
+                <h2 class="home-card-title">Foglio Rapido & Tabella</h2>
+                <span class="home-card-tagline">Scrittura Libera, Crono/Durata & Riepilogo Strutturato</span>
+              </div>
+            </div>
+
+            <p class="home-card-desc">
+              Un foglio bianco minimale per registrare al volo ogni sessione: seleziona o scrivi la persona, scegli il tipo di allenamento, attiva il cronometro o digita la durata e genera istantaneamente una tabella riassuntiva ordinata ed esportabile.
+            </p>
+
+            <ul class="home-card-features">
+              <li>📄 <strong>Foglio Bianco Pulito</strong>: simulazione blocco note cartaceo moderno</li>
+              <li>⏱️ <strong>Doppio Input Tempo</strong>: cronometro live con start/pausa o minuti/secondi manuali</li>
+              <li>👥 <strong>Persone & Categorie</strong>: autocompletamento rapido o testo libero</li>
+              <li>📊 <strong>Tabella Riepilogo Istantanea</strong>: Persona, Tipo Allenamento, Tempo e Azioni</li>
+              <li>📲 <strong>Split-View per iPad</strong>: foglio a sinistra e tabella a destra su schermi grandi</li>
+            </ul>
+
+            <button class="btn-home-action btn-sheet-action">
+              <span>▶ APRI FOGLIO RAPIDO</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Striscia informativa di riepilogo in Home -->
+        <div class="home-quick-stats">
+          <div class="stat-mini-card">
+            <span class="stat-mini-title">👥 Atleti Registrati</span>
+            <span class="stat-mini-value" id="home-stat-athletes">4</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-title">📝 Sessioni Foglio</span>
+            <span class="stat-mini-value" id="home-stat-sheet">3 salvate</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-title">⏱️ Ultimo Crono Pista</span>
+            <span class="stat-mini-value" id="home-stat-chrono">06.92 (Marco Rossi)</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-title">🏋️ Ultimo Carico Potenziamento</span>
+            <span class="stat-mini-value" id="home-stat-strength">Power Clean 85 Kg</span>
+          </div>
+          <div class="stat-mini-card">
+            <span class="stat-mini-title">📱 Funzionamento</span>
+            <span class="stat-mini-value" id="home-stat-date">100% Offline in Pista</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           VISTA: FOGLIO RAPIDO MINIMALE & TABELLA RIEPILOGATIVA
+           =================================================================== -->
+      <section id="view-sheet" class="view-section">
+        
+        <!-- Top Bar di ritorno alla Home -->
+        <div class="session-top-bar">
+          <button class="btn-back-home" data-target="view-home">
+            ← 🏠 Pagina Iniziale
+          </button>
+          <div class="session-badge-title" style="color: #ffffff; border-color: rgba(255, 255, 255, 0.3);">
+            <span class="dot-live" style="background: #ffffff;"></span>
+            <strong>FOGLIO RAPIDO MINIMALE</strong> • Inserimento Libero & Tabella
+          </div>
+          <div style="display: flex; gap: 8px; margin-left: auto;">
+            <button id="btn-sheet-export-csv" class="btn-icon-subtle" title="Esporta dati in CSV per Excel">
+              📥 Esporta CSV
+            </button>
+            <button id="btn-sheet-clear-all" class="btn-icon-subtle" style="color: var(--accent-red);" title="Cancella tutte le righe della tabella">
+              🗑️ Svuota
+            </button>
+          </div>
+        </div>
+
+        <!-- CONTENITORE RESPONSIVE: Dual-Pane su iPad/Desktop, Verticale su Mobile -->
+        <div class="sheet-split-layout">
+
+          <!-- COLONNA SINISTRA: IL FOGLIO BIANCO PULITO E MINIMALE -->
+          <div class="sheet-left-col">
+            <div class="sheet-paper">
+              
+              <!-- Dettaglio foglio: fori e testata editoriale -->
+              <div class="sheet-paper-header">
+                <div class="sheet-holes">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="sheet-paper-title-box">
+                  <span class="sheet-paper-label">SCHEDA DI ALLENAMENTO DIRETTA</span>
+                  <span id="sheet-current-date-badge" class="sheet-paper-date">Oggi</span>
+                </div>
+              </div>
+
+              <!-- SELETTORE MODALITÀ FOGLIO: SINGOLO VS MULTI-ATLETA -->
+              <div class="sheet-mode-selector">
+                <button type="button" id="btn-sheet-mode-single" class="sheet-mode-btn active">
+                  👤 Singolo Atleta
+                </button>
+                <button type="button" id="btn-sheet-mode-multi" class="sheet-mode-btn">
+                  👥 Multi-Atleta (Gruppo)
+                </button>
+              </div>
+
+              <!-- FORM DI COMPILAZIONE DEL FOGLIO -->
+              <form id="form-quick-sheet">
+                
+                <!-- CAMPO 1A: PERSONA (MODALITÀ SINGOLO ATLETA) -->
+                <div id="sheet-single-person-box" class="sheet-field">
+                  <label class="sheet-label" for="sheet-input-person">
+                    <span>1. PERSONA / ATLETA</span>
+                    <span class="sheet-label-sub">Chi si sta allenando?</span>
+                  </label>
+                  <div style="position: relative;">
+                    <input type="text" id="sheet-input-person" class="sheet-input" 
+                           placeholder="Es. Marco Rossi o tocca un nome rapido" list="athletes-datalist" autocomplete="off">
+                    <datalist id="athletes-datalist">
+                      <!-- Popolato dinamicamente da JS con gli atleti salvati -->
+                    </datalist>
+                  </div>
+                  <!-- Selezione rapida con chip atleti registrati -->
+                  <div id="sheet-quick-athletes" class="sheet-quick-tags">
+                    <!-- Popolato da JS con click rapido per compilare -->
+                  </div>
+                </div>
+
+                <!-- CAMPO 1B: ATLETI COINVOLTI (MODALITÀ MULTI-ATLETA) -->
+                <div id="sheet-multi-person-box" class="sheet-field" style="display: none;">
+                  <label class="sheet-label">
+                    <span>1. ATLETI COINVOLTI NEL GRUPPO</span>
+                    <span id="sheet-multi-count-badge" class="sheet-label-sub" style="color: #0284c7; font-weight: 700;">0 atleti selezionati</span>
+                  </label>
+                  <p style="font-size: 0.76rem; color: #64748b; margin-bottom: 8px;">
+                    Seleziona gli atleti che partecipano insieme a questo lavoro:
+                  </p>
+
+                  <!-- Chips atleti con toggle selezione attiva/disattiva -->
+                  <div id="sheet-multi-athletes-chips" class="sheet-multi-chips-grid">
+                    <!-- Popolato dinamicamente via JS con toggle selezione -->
+                  </div>
+
+                  <!-- Aggiungi atleta manuale al volo nel gruppo -->
+                  <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <input type="text" id="sheet-input-add-multi" class="sheet-input" style="flex: 1; padding: 7px 12px; font-size: 0.88rem;" 
+                           placeholder="Aggiungi altro atleta al gruppo...">
+                    <button type="button" id="btn-sheet-add-multi-person" class="btn-sheet-chrono" style="background: #0f172a; color: #fff; padding: 7px 14px;">
+                      + Aggiungi
+                    </button>
+                  </div>
+
+                  <!-- Opzione gestione tempi: Stesso tempo per tutti vs Tempi individuali -->
+                  <div class="sheet-multi-timing-toggle">
+                    <span style="font-size: 0.74rem; font-weight: 800; color: #334155; text-transform: uppercase;">Modalità Tempi Gruppo:</span>
+                    <div style="display: flex; gap: 8px; margin-top: 4px;">
+                      <button type="button" id="btn-sheet-time-mode-same" class="sheet-time-mode-btn active">
+                        ⏱️ Stesso tempo per tutti
+                      </button>
+                      <button type="button" id="btn-sheet-time-mode-indiv" class="sheet-time-mode-btn">
+                        ⚡ Tempi individuali / Arrivi
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Griglia atleti selezionati con tempi individuali -->
+                  <div id="sheet-multi-athletes-list-box" style="margin-top: 10px; display: none;">
+                    <div style="font-size: 0.74rem; font-weight: 800; color: #334155; text-transform: uppercase; margin-bottom: 6px;">
+                      Tempi / Arrivi Individuali Ciascun Atleta:
+                    </div>
+                    <div id="sheet-multi-athletes-grid" class="sheet-multi-grid">
+                      <!-- Righe iniettate via JS per ogni atleta nel gruppo -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CAMPO 2: TIPO DI ALLENAMENTO -->
+                <div class="sheet-field">
+                  <label class="sheet-label">
+                    <span>2. TIPO DI ALLENAMENTO</span>
+                    <span class="sheet-label-sub">Seleziona o digita l'attività</span>
+                  </label>
+                  
+                  <!-- Chips di selezione rapida -->
+                  <div class="sheet-chips" id="sheet-type-chips">
+                    <button type="button" class="sheet-chip active" data-type="Corsa Veloce">🏃 Corsa Veloce</button>
+                    <button type="button" class="sheet-chip" data-type="Ripetute Pista">⏱️ Ripetute</button>
+                    <button type="button" class="sheet-chip" data-type="Sollevamento Pesi">🏋️ Pesi / Forza</button>
+                    <button type="button" class="sheet-chip" data-type="Balzi & Pliometria">🦘 Pliometria</button>
+                    <button type="button" class="sheet-chip" data-type="Cardio / Fondo">🫀 Fondo</button>
+                    <button type="button" class="sheet-chip" data-type="Ostacoli">🚧 Ostacoli</button>
+                    <button type="button" class="sheet-chip" data-type="Core & Mobilità">🤸 Core / Mobilità</button>
+                  </div>
+
+                  <input type="text" id="sheet-input-custom-type" class="sheet-input" 
+                         placeholder="Oppure specifica altro tipo di allenamento...">
+                </div>
+
+                <!-- CAMPO 3: TEMPI / DURATA (Cronometro live + Inserimento manuale) -->
+                <div class="sheet-field">
+                  <label class="sheet-label">
+                    <span>3. TEMPO / DURATA DELLA SESSIONE</span>
+                    <span class="sheet-label-sub">Avvia il cronometro o digita la durata</span>
+                  </label>
+
+                  <!-- Modulo Cronometro Integrato sul Foglio -->
+                  <div class="sheet-chrono-card">
+                    <div class="sheet-chrono-top">
+                      <span class="sheet-chrono-tag">⏱️ CRONOMETRO DAL VIVO</span>
+                      <span id="sheet-chrono-status" class="sheet-chrono-status-text">IN ATTESA</span>
+                    </div>
+                    
+                    <div id="sheet-chrono-display" class="sheet-chrono-display">00:00.00</div>
+                    
+                    <div class="sheet-chrono-actions">
+                      <button type="button" id="btn-sheet-chrono-toggle" class="btn-sheet-chrono btn-sheet-chrono-start">
+                        ▶ AVVIA CRONO
+                      </button>
+                      <button type="button" id="btn-sheet-chrono-reset" class="btn-sheet-chrono btn-sheet-chrono-reset">
+                        AZZERA
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- In alternativa: Inserimento Manuale -->
+                  <div class="sheet-manual-time-box">
+                    <span class="sheet-manual-or-divider">oppure inserisci durata manuale</span>
+                    <div class="sheet-manual-inputs-row">
+                      <div class="sheet-time-unit">
+                        <input type="number" id="sheet-input-manual-mins" class="sheet-input-num" min="0" max="999" placeholder="0">
+                        <span class="sheet-unit-label">min</span>
+                      </div>
+                      <span style="font-weight: 800; font-size: 1.2rem; color: #64748b;">:</span>
+                      <div class="sheet-time-unit">
+                        <input type="number" id="sheet-input-manual-secs" class="sheet-input-num" min="0" max="59" placeholder="00">
+                        <span class="sheet-unit-label">sec</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CAMPO 4: NOTE OPZIONALI -->
+                <div class="sheet-field">
+                  <label class="sheet-label" for="sheet-input-notes">
+                    <span>4. NOTE & SENSAZIONI TECNICHE (OPZIONALE)</span>
+                  </label>
+                  <input type="text" id="sheet-input-notes" class="sheet-input" 
+                         placeholder="Es. Vento a favore, 4 serie con recupero 3', buone sensazioni">
+                </div>
+
+                <!-- TASTO AZIONE FINALE -->
+                <button type="submit" id="btn-sheet-submit" class="btn-sheet-submit">
+                  <span id="btn-sheet-submit-text">✍️ REGISTRA SUL FOGLIO & AGGIUNGI A TABELLA</span>
+                  <span class="btn-arrow">→</span>
+                </button>
+
+              </form>
+            </div>
+          </div>
+
+          <!-- COLONNA DESTRA: TABELLA RIEPILOGATIVA PULITA E STRUTTURATA -->
+          <div class="sheet-right-col">
+            <div class="sheet-table-card">
+              
+              <!-- Intestazione Tabella e Statistiche di Riepilogo -->
+              <div class="sheet-table-header">
+                <div>
+                  <h3 class="sheet-table-main-title">📊 Tabella Riepilogativa Sessioni</h3>
+                  <span class="sheet-table-subtitle">Riepilogo strutturato in tempo reale dei dati registrati</span>
+                </div>
+                <div class="sheet-table-counters">
+                  <span id="sheet-badge-count" class="sheet-counter-badge">0 Righe</span>
+                  <span id="sheet-badge-total-time" class="sheet-counter-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3);">Tot: 00:00</span>
+                </div>
+              </div>
+
+              <!-- Filtro di ricerca rapido -->
+              <div style="margin-bottom: 12px;">
+                <input type="text" id="sheet-table-search" class="search-input" style="width: 100%;" 
+                       placeholder="🔍 Cerca per persona, tipo allenamento o nota...">
+              </div>
+
+              <!-- CONTENITORE TABELLA A SCORRIMENTO -->
+              <div class="splits-table-container" style="max-height: 580px; overflow-y: auto;">
+                <table class="splits-table sheet-structured-table">
+                  <thead>
+                    <tr>
+                      <th style="min-width: 140px;">Persona / Atleta</th>
+                      <th style="min-width: 150px;">Tipo di Allenamento</th>
+                      <th style="min-width: 110px; text-align: right;">Tempo / Durata</th>
+                      <th style="width: 50px; text-align: center;">Az.</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sheet-table-body">
+                    <!-- Popolato dinamicamente via JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Footer Tabella con riassunto informativo -->
+              <div class="sheet-table-footer">
+                <span style="font-size: 0.78rem; color: var(--text-muted);">
+                  💡 I dati rimangono memorizzati nel database locale e sono consultabili offline o esportabili in CSV.
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           VISTA 1: CRONOMETRO PROFESSIONALE
+           =================================================================== -->
+      <section id="view-stopwatch" class="view-section">
+        
+        <!-- Top Bar di ritorno alla Home -->
+        <div class="session-top-bar">
+          <button class="btn-back-home" data-target="view-home">
+            ← 🏠 Pagina Iniziale
+          </button>
+          <div class="session-badge-title">
+            <span class="dot-live"></span>
+            <strong>SESSIONE ATLETICA</strong> • Pista & Crono
+          </div>
+        </div>
+        
+        <!-- Guida installazione rapida su iOS se non in standalone -->
+        <div id="ios-pwa-tip" class="pwa-install-banner" style="display:none;">
+          <div class="pwa-text">
+            <strong>Installa su iPhone o iPad</strong>
+            Tocca <strong>Condividi</strong> e seleziona <strong>"Aggiungi a schermata Home"</strong> per usarla a schermo intero come una vera app.
+          </div>
+          <button id="btn-close-pwa-tip" class="btn-icon-subtle">✕</button>
+        </div>
+
+        <!-- Selettore Modalità: Singolo o Multi-Corsia -->
+        <div class="stopwatch-mode-selector">
+          <button id="btn-mode-single" class="mode-btn active">👤 Crono Singolo</button>
+          <button id="btn-mode-multi" class="mode-btn">👥 Multi-Corsia (6 Corsie)</button>
+        </div>
+
+        <!-- Selezione Contesto (Atleta + Distanza/Evento) -->
+        <div class="stopwatch-context-bar">
+          <select id="chrono-select-athlete" class="select-custom">
+            <option value="">-- Seleziona Atleta (Opzionale) --</option>
+          </select>
+          <div class="chrono-event-picker-group">
+            <select id="chrono-select-event" class="select-custom" style="flex: 1;">
+              <!-- Popolato dinamicamente via JS con opzione "+ Aggiungi Nuovo..." -->
+            </select>
+            <button type="button" id="btn-add-chrono-event" class="btn-action" 
+                    title="Aggiungi nuovo tipo di allenamento o distanza" 
+                    style="white-space: nowrap; height: 46px; padding: 0 14px; background: linear-gradient(135deg, #0ea5e9, #0284c7); gap: 4px; font-size: 0.88rem; flex-shrink: 0;">
+              ➕ Nuovo
+            </button>
+          </div>
+        </div>
+
+        <!-- Display Tempo Principale -->
+        <div class="stopwatch-display-container">
+          <div id="starter-status" class="starter-indicator"></div>
+          <div id="main-stopwatch-display" class="time-display">00:00.00</div>
+          
+          <div id="recovery-timer-box" style="display:none;" class="recovery-badge">
+            ⏳ Recupero: <span id="recovery-remaining-text">03:00</span>
+            <button id="btn-cancel-recovery" style="background:none;border:none;color:var(--accent-red);cursor:pointer;margin-left:4px;">✕</button>
+          </div>
+        </div>
+
+        <!-- Pulsantiera Singolo -->
+        <div id="single-controls" class="stopwatch-actions">
+          <button id="btn-reset" class="btn-ctrl btn-reset">
+            <span>AZZERA</span>
+          </button>
+          <button id="btn-toggle-main" class="btn-ctrl btn-start">
+            <span id="btn-toggle-text">AVVIA</span>
+          </button>
+          <button id="btn-lap" class="btn-ctrl btn-lap">
+            <span>INTERTEMPO</span>
+          </button>
+          <button id="btn-official-starter" class="btn-ctrl btn-starter-official">
+            ⏱️ Procedura Starter FIDAL ("Ai vostri posti" → "Pronti" → "SPARO")
+          </button>
+        </div>
+
+        <!-- Preset Recupero Rapido -->
+        <div class="card" style="padding: 12px 16px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">
+              Timer Recupero Ripetute:
+            </span>
+            <span id="custom-recovery-label" style="font-size: 0.8rem; color: var(--accent-cyan);">Avvia dopo lo stop</span>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-icon-subtle btn-rec-preset" data-seconds="60">1' min</button>
+            <button class="btn-icon-subtle btn-rec-preset" data-seconds="90">1' 30"</button>
+            <button class="btn-icon-subtle btn-rec-preset" data-seconds="120">2' min</button>
+            <button class="btn-icon-subtle btn-rec-preset" data-seconds="180">3' min</button>
+            <button class="btn-icon-subtle btn-rec-preset" data-seconds="300">5' min</button>
+            <button id="btn-start-manual-rec" class="btn-icon-subtle" style="color:var(--accent-orange);border-color:var(--accent-orange);">
+              ▶ Avvia Ora
+            </button>
+          </div>
+        </div>
+
+        <!-- Sezione MULTI-CORSIA (Visualizzata in modalità multi) -->
+        <div id="multi-controls" style="display: none;">
+          <div class="multi-lanes-grid" id="lanes-container">
+            <!-- Corsie iniettate via JS -->
+          </div>
+          <button id="btn-save-multi-results" class="btn-action" style="width: 100%; justify-content: center; height: 50px; font-size: 1.05rem; background: linear-gradient(135deg, #0ea5e9, #38bdf8);">
+            💾 Salva Risultati di Tutte le Corsie
+          </button>
+        </div>
+
+        <!-- Tabella Split / Parziali (Singolo) -->
+        <div id="splits-section" class="card">
+          <div class="card-header">
+            <h3 class="card-title">Intertempi & Passaggi</h3>
+            <button id="btn-save-single-result" class="btn-action" style="padding: 6px 14px; font-size: 0.85rem;">
+              💾 Salva Risultato
+            </button>
+          </div>
+          <div class="splits-table-container">
+            <table class="splits-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tempo Totale</th>
+                  <th>Delta (Giro/Tratto)</th>
+                </tr>
+              </thead>
+              <tbody id="splits-body">
+                <tr>
+                  <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 18px;">
+                    Nessun intertempo registrato. Premi 'INTERTEMPO' durante la corsa per registrare i passaggi.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           VISTA: SESSIONE DI POTENZIAMENTO MUSCOLARE (PER L'ATLETICA)
+           =================================================================== -->
+      <section id="view-strength" class="view-section">
+        
+        <!-- Top Bar di ritorno alla Home -->
+        <div class="session-top-bar">
+          <button class="btn-back-home" data-target="view-home">
+            ← 🏠 Pagina Iniziale
+          </button>
+          <div class="session-badge-title" style="color: var(--accent-orange); border-color: rgba(249, 115, 22, 0.4);">
+            <span class="dot-live" style="background: var(--accent-orange);"></span>
+            <strong>POTENZIAMENTO MUSCOLARE</strong> • Atletica FIDAL
+          </div>
+        </div>
+
+        <!-- Selettore Atleta per il Potenziamento -->
+        <div class="stopwatch-context-bar" style="margin-bottom: 14px;">
+          <select id="strength-select-athlete" class="select-custom" style="flex: 1;">
+            <option value="">-- Seleziona Atleta per Potenziamento --</option>
+          </select>
+          <select id="strength-select-group" class="select-custom" style="flex: 1;">
+            <option value="Tutti">Tutti i Gruppi & Discipline</option>
+            <option value="Velocità">Velocità & Ostacoli</option>
+            <option value="Salti">Salti (Lungo, Alto, Triplo, Asta)</option>
+            <option value="Mezzofondo">Mezzofondo & Fondo</option>
+            <option value="Lanci">Lanci (Peso, Disco, Giavellotto)</option>
+            <option value="Generale">Prevenzione & Core</option>
+          </select>
+        </div>
+
+        <!-- Sotto-navigazione interna Potenziamento -->
+        <div class="strength-subnav">
+          <button class="strength-nav-btn active" data-sub="panel-str-timer">
+            ⏱️ Timer & Recuperi
+          </button>
+          <button class="strength-nav-btn" data-sub="panel-str-workouts">
+            📋 Schede Esercizi
+          </button>
+          <button class="strength-nav-btn" data-sub="panel-str-calculator">
+            🎯 Calcolatore 1RM
+          </button>
+          <button class="strength-nav-btn" data-sub="panel-str-logs">
+            📝 Diario Carichi
+          </button>
+        </div>
+
+        <!-- SUB-PANEL 1: TIMER & RECUPERI POTENZIAMENTO -->
+        <div id="panel-str-timer" class="strength-subpanel active">
+          
+          <!-- Selettore modalità timer: Pesi/Recupero Serie | EMOM | TABATA -->
+          <div class="stopwatch-mode-selector" style="margin-top: 10px;">
+            <button id="btn-str-mode-rest" class="mode-btn active">🏋️ Recupero Serie Pesi</button>
+            <button id="btn-str-mode-emom" class="mode-btn">⚡ EMOM (Ogni Minuto)</button>
+            <button id="btn-str-mode-tabata" class="mode-btn">🔥 TABATA / Intervalli</button>
+          </div>
+
+          <!-- MODO 1: RECUPERO SERIE PESI -->
+          <div id="str-mode-rest-box">
+            <div class="card" style="text-align: center; padding: 22px 16px;">
+              <div id="str-rest-status-badge" class="timer-status-badge">
+                PRONTO PER LA SERIE
+              </div>
+              <div id="str-rest-display" class="time-display" style="font-size: clamp(3.2rem, 11vw, 5.8rem); margin: 12px 0;">
+                02:00
+              </div>
+              
+              <!-- Contatore Serie -->
+              <div class="series-counter-box">
+                <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Serie Completate:</span>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 6px;">
+                  <button id="btn-str-series-minus" class="btn-icon-subtle" style="width: 40px; height: 40px; font-size: 1.3rem;">-</button>
+                  <span id="str-series-count" style="font-size: 1.8rem; font-weight: 800; color: var(--accent-orange); min-width: 45px;">0</span>
+                  <button id="btn-str-series-plus" class="btn-icon-subtle" style="width: 40px; height: 40px; font-size: 1.3rem;">+</button>
+                </div>
+              </div>
+
+              <!-- Preset Recuperi Forza Atletica -->
+              <div style="margin: 20px 0 16px 0;">
+                <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">
+                  Imposta Tempo Recupero Tra le Serie:
+                </div>
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                  <button class="btn-icon-subtle btn-str-rec-preset" data-secs="60">1' min</button>
+                  <button class="btn-icon-subtle btn-str-rec-preset" data-secs="90">1' 30"</button>
+                  <button class="btn-icon-subtle btn-str-rec-preset active" data-secs="120">2' min</button>
+                  <button class="btn-icon-subtle btn-str-rec-preset" data-secs="180">3' min (Forza)</button>
+                  <button class="btn-icon-subtle btn-str-rec-preset" data-secs="300">5' min (Max)</button>
+                </div>
+              </div>
+
+              <!-- Controlli Timer Recupero -->
+              <div style="display: flex; gap: 10px; justify-content: center; max-width: 420px; margin: 0 auto;">
+                <button id="btn-str-rest-start" class="btn-ctrl btn-start" style="flex: 2; height: 56px; font-size: 1.15rem; background: linear-gradient(135deg, #f97316, #ea580c);">
+                  ▶ AVVIA RECUPERO
+                </button>
+                <button id="btn-str-rest-reset" class="btn-ctrl btn-reset" style="flex: 1; height: 56px;">
+                  AZZERA
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODO 2: EMOM -->
+          <div id="str-mode-emom-box" style="display: none;">
+            <div class="card" style="text-align: center; padding: 22px 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span id="str-emom-round-badge" class="timer-status-badge" style="background: rgba(14, 165, 233, 0.2); color: var(--accent-cyan); border-color: var(--accent-cyan);">
+                  ROUND 1 DI 10
+                </span>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 0.85rem; color: var(--text-muted);">Durata:</span>
+                  <select id="str-emom-minutes-select" class="select-custom" style="padding: 4px 8px; font-size: 0.85rem;">
+                    <option value="8">8 Minuti</option>
+                    <option value="10" selected>10 Minuti</option>
+                    <option value="12">12 Minuti</option>
+                    <option value="15">15 Minuti</option>
+                    <option value="20">20 Minuti</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="str-emom-display" class="time-display" style="font-size: clamp(3.2rem, 12vw, 6rem); color: var(--accent-cyan); margin: 12px 0;">
+                01:00
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 18px;">
+                Esegui le ripetizioni all'inizio di ogni minuto. Riposa per il tempo residuo fino al beep di partenza!
+              </p>
+
+              <div style="display: flex; gap: 10px; justify-content: center; max-width: 420px; margin: 0 auto;">
+                <button id="btn-str-emom-start" class="btn-ctrl btn-start" style="flex: 2; height: 56px; font-size: 1.15rem; background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                  ▶ AVVIA EMOM
+                </button>
+                <button id="btn-str-emom-reset" class="btn-ctrl btn-reset" style="flex: 1; height: 56px;">
+                  AZZERA
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODO 3: TABATA / INTERVAL TRAINING -->
+          <div id="str-mode-tabata-box" style="display: none;">
+            <div class="card" style="text-align: center; padding: 22px 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span id="str-tabata-phase-badge" class="timer-status-badge" style="background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border-color: var(--accent-green);">
+                  LAVORO (PUSH)
+                </span>
+                <span id="str-tabata-round-badge" style="font-size: 0.92rem; font-weight: 700; color: #fff;">
+                  Round 1 / 8
+                </span>
+              </div>
+
+              <div id="str-tabata-display" class="time-display" style="font-size: clamp(3.2rem, 12vw, 6rem); color: var(--accent-green); margin: 12px 0;">
+                20
+              </div>
+
+              <div class="form-row" style="max-width: 400px; margin: 0 auto 18px auto; text-align: left;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-size: 0.78rem;">Lavoro (sec)</label>
+                  <input type="number" id="str-tabata-work-secs" class="form-control" value="20" min="5" max="120">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-size: 0.78rem;">Riposo (sec)</label>
+                  <input type="number" id="str-tabata-rest-secs" class="form-control" value="10" min="5" max="120">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-size: 0.78rem;">Round Totali</label>
+                  <input type="number" id="str-tabata-rounds-total" class="form-control" value="8" min="1" max="50">
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; justify-content: center; max-width: 420px; margin: 0 auto;">
+                <button id="btn-str-tabata-start" class="btn-ctrl btn-start" style="flex: 2; height: 56px; font-size: 1.15rem; background: linear-gradient(135deg, #10b981, #059669);">
+                  ▶ AVVIA TABATA
+                </button>
+                <button id="btn-str-tabata-reset" class="btn-ctrl btn-reset" style="flex: 1; height: 56px;">
+                  AZZERA
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SUB-PANEL 2: SCHEDE DI POTENZIAMENTO ATLETICA -->
+        <div id="panel-str-workouts" class="strength-subpanel" style="display: none;">
+          <div class="athletes-toolbar" style="margin-top: 10px; margin-bottom: 16px;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Schede Tecniche di Potenziamento FIDAL</h3>
+            <button id="btn-open-new-strength-workout" class="btn-action" style="margin-left: auto; background: linear-gradient(135deg, #f97316, #ea580c);">
+              ➕ Nuova Scheda
+            </button>
+          </div>
+
+          <div id="strength-workouts-list-container">
+            <!-- Schede iniettate da JS -->
+          </div>
+        </div>
+
+        <!-- SUB-PANEL 3: CALCOLATORE 1RM & PERCENTUALI CARICO -->
+        <div id="panel-str-calculator" class="strength-subpanel" style="display: none;">
+          <div class="card" style="margin-top: 10px;">
+            <h3 class="card-title">🎯 Calcolatore Massimale 1RM per l'Atletica</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+              Inserisci il peso sollevato e le ripetizioni completate per calcolare il carico massimale teorico (1RM) e le percentuali ottimali di lavoro (forza massimale, esplosiva e reattiva).
+            </p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Esercizio</label>
+                <select id="calc-exercise-select" class="form-control">
+                  <option value="Squat con bilanciere">Squat con bilanciere</option>
+                  <option value="Mezzo Squat Dinamico">Mezzo Squat Dinamico</option>
+                  <option value="Power Clean (Girata)">Power Clean (Girata al petto)</option>
+                  <option value="Trap Bar Deadlift">Trap Bar Deadlift</option>
+                  <option value="Panca Piana">Panca Piana</option>
+                  <option value="Hip Thrust">Hip Thrust</option>
+                  <option value="Push Press">Push Press</option>
+                  <option value="Stacco da terra">Stacco da terra</option>
+                  <option value="Altro Esercizio">Altro Esercizio</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Peso Sollevato (Kg)</label>
+                <input type="number" id="calc-weight-input" class="form-control" value="80" min="5" max="400" step="2.5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Ripetizioni Eseguite</label>
+                <input type="number" id="calc-reps-input" class="form-control" value="5" min="1" max="15">
+              </div>
+            </div>
+
+            <!-- Box Risultato 1RM -->
+            <div class="one-rm-result-box">
+              <div style="font-size: 0.88rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">
+                Massimale Stimato (1RM):
+              </div>
+              <div id="calc-1rm-display" style="font-size: 2.8rem; font-weight: 800; color: var(--accent-orange); font-family: 'SF Mono', monospace; margin: 4px 0;">
+                93.3 Kg
+              </div>
+              <button id="btn-save-1rm-to-log" class="btn-action" style="padding: 8px 16px; font-size: 0.9rem; background: var(--accent-orange); border: none; margin-top: 6px;">
+                💾 Salva nel Diario Carichi
+              </button>
+            </div>
+
+            <!-- Tabella Percentuali di Carico -->
+            <div style="margin-top: 20px;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 10px;">
+                Ripartizione Percentuali di Carico per l'Atletica:
+              </h4>
+              <div class="splits-table-container">
+                <table class="splits-table">
+                  <thead>
+                    <tr>
+                      <th>% Carico</th>
+                      <th>Peso Stimato</th>
+                      <th>Obiettivo Atletico FIDAL</th>
+                    </tr>
+                  </thead>
+                  <tbody id="calc-percentages-body">
+                    <!-- Popolato via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-PANEL 4: DIARIO CARICHI -->
+        <div id="panel-str-logs" class="strength-subpanel" style="display: none;">
+          
+          <!-- Card Inserimento Rapido Carico -->
+          <div class="card" style="margin-top: 10px;">
+            <h3 class="card-title">➕ Registra Nuova Serie / Carico</h3>
+            <form id="form-add-strength-log" style="margin-top: 12px;">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Atleta</label>
+                  <select id="log-form-athlete" class="form-control" required>
+                    <!-- Popolato da JS -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Esercizio</label>
+                  <input type="text" id="log-form-exercise" class="form-control" required placeholder="Es. Back Squat, Power Clean, Balzi...">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Carico (Kg)</label>
+                  <input type="number" id="log-form-weight" class="form-control" required placeholder="Es. 90" step="0.5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Serie x Ripetizioni</label>
+                  <input type="text" id="log-form-sets-reps" class="form-control" required placeholder="Es. 4 x 5 o 3 x 6">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Note Tecniche (Sensazioni, Velocità, RPE)</label>
+                <input type="text" id="log-form-notes" class="form-control" placeholder="Es. Spinta molto fluida, recupero 3', nessun fastidio">
+              </div>
+
+              <button type="submit" class="btn-action" style="width: 100%; justify-content: center; height: 46px; background: linear-gradient(135deg, #f97316, #ea580c);">
+                💾 Salva Serie nel Diario
+              </button>
+            </form>
+          </div>
+
+          <!-- Storico Carichi Registrati -->
+          <div class="athletes-toolbar" style="margin-top: 20px; margin-bottom: 14px;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Storico Carichi Registrati</h3>
+            <button id="btn-export-strength-csv" class="btn-icon-subtle" style="margin-left: auto;">
+              📥 Esporta CSV Carichi
+            </button>
+          </div>
+
+          <div id="strength-logs-list-container">
+            <!-- Logs generati dinamicamente -->
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           VISTA 2: ATLETI & CATEGORIE
+           =================================================================== -->
+      <section id="view-athletes" class="view-section">
+        <div class="athletes-toolbar">
+          <input type="text" id="athlete-search" class="search-input" placeholder="Cerca atleta per nome o specialità...">
+          <button id="btn-open-new-athlete" class="btn-action">
+            ➕ Nuovo Atleta
+          </button>
+        </div>
+
+        <div id="athletes-list-container" class="athletes-grid">
+          <!-- Card atleti generate dinamicamente -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VISTA 3: SCHEDE DI ALLENAMENTO
+           =================================================================== -->
+      <section id="view-workouts" class="view-section">
+        <div class="athletes-toolbar">
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: #fff;">Programmi & Schede</h2>
+          <button id="btn-open-new-workout" class="btn-action" style="margin-left: auto;">
+            ➕ Nuova Scheda
+          </button>
+        </div>
+
+        <div id="workouts-list-container">
+          <!-- Schede generate dinamicamente -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VISTA 4: STORICO TEMPI & RISULTATI
+           =================================================================== -->
+      <section id="view-results" class="view-section">
+        <div class="athletes-toolbar">
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: #fff;">Storico Cronometraggi</h2>
+          <button id="btn-export-csv" class="btn-icon-subtle" style="margin-left: auto;">
+            📥 Esporta Dati
+          </button>
+        </div>
+
+        <div id="results-list-container">
+          <!-- Risultati generati dinamicamente -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VISTA 5: IMPOSTAZIONI & BACKUP
+           =================================================================== -->
+      <section id="view-settings" class="view-section">
+        <div class="card">
+          <h3 class="card-title">⚙️ Impostazioni Cronometro & Starter</h3>
+          <div style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label">Suoni & Segnali Acustici (Web Audio)</label>
+              <label style="display:flex; align-items:center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="setting-sound" checked style="width: 20px; height: 20px;">
+                <span>Abilita sparo starter, beep di avviso e fine recupero</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Schermo sempre attivo (Screen Wake Lock)</label>
+              <label style="display:flex; align-items:center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="setting-wakelock" checked style="width: 20px; height: 20px;">
+                <span>Non spegnere lo schermo dell'iPad/iPhone in pista</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">💾 Backup & Sincronizzazione</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px;">
+            Esporta tutti i dati su un file JSON o trasferiscili tra il tuo Mac, iPhone e iPad.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="btn-export-json" class="btn-action">
+              📤 Esporta Backup JSON
+            </button>
+            <label class="btn-icon-subtle" style="display: inline-flex; align-items: center; cursor: pointer;">
+              📥 Ripristina Backup JSON
+              <input type="file" id="file-import-json" accept=".json" style="display: none;">
+            </label>
+            <button id="btn-reset-db" class="btn-icon-subtle" style="color: var(--accent-red); border-color: var(--accent-red);">
+              ⚠️ Ripristina Dati Iniziali
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">📱 Informazioni App & Compatibilità</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            <strong>TrackMaster Atletica Leggera</strong> è ottimizzata per:
+            <br>• <strong>iPhone</strong> (tutti i modelli, supporto Dynamic Island e Safe Area)
+            <br>• <strong>iPad & Tablet</strong> (modalità multi-corsia e split view per allenatori al traguardo)
+            <br>• <strong>100% Offline</strong>: funziona in pista anche in assenza di connessione internet.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Navigazione Bottom Bar per iPhone / Tablet -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" data-target="view-home">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Inizio</span>
+      </button>
+      <button class="nav-tab" data-target="view-sheet">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+        <span>Foglio</span>
+      </button>
+      <button class="nav-tab" data-target="view-stopwatch">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5"></path><path d="M12 5V2"></path><path d="M10 2h4"></path></svg>
+        <span>Atletica</span>
+      </button>
+      <button class="nav-tab" data-target="view-strength">
+        <svg viewBox="0 0 24 24"><path d="M6 5v14M18 5v14M2 9h4M2 15h4M18 9h4M18 15h4M6 12h12"></path></svg>
+        <span>Potenziamento</span>
+      </button>
+      <button class="nav-tab" data-target="view-athletes">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M5.5 21a8.38 8.38 0 0 1 13 0"></path></svg>
+        <span>Atleti</span>
+      </button>
+      <button class="nav-tab" data-target="view-workouts">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        <span>Schede</span>
+      </button>
+      <button class="nav-tab" data-target="view-results">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Risultati</span>
+      </button>
+      <button class="nav-tab" data-target="view-settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Opzioni</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: NUOVO / MODIFICA ATLETA
+       ======================================================================= -->
+  <div id="modal-athlete" class="modal-overlay">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 id="modal-athlete-title" class="card-title">Nuovo Atleta</h3>
+        <button class="btn-icon-subtle btn-close-modal">✕</button>
+      </div>
+      <form id="form-athlete">
+        <input type="hidden" id="ath-form-id">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome</label>
+            <input type="text" id="ath-form-nome" class="form-control" required placeholder="Es. Marco">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cognome</label>
+            <input type="text" id="ath-form-cognome" class="form-control" required placeholder="Es. Rossi">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Anno Nascita</label>
+            <input type="number" id="ath-form-anno" class="form-control" value="2005" min="1930" max="2025">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria FIDAL</label>
+            <select id="ath-form-categoria" class="form-control">
+              <option value="Esordienti">Esordienti (EM/EF)</option>
+              <option value="Ragazzi/e">Ragazzi / Ragazze (RM/RF)</option>
+              <option value="Cadetti/e">Cadetti / Cadette (CM/CF)</option>
+              <option value="Allievi/e">Allievi / Allieve (AM/AF)</option>
+              <option value="Juniores">Juniores (JM/JF)</option>
+              <option value="Promesse" selected>Promesse (PM/PF)</option>
+              <option value="Seniores">Seniores (SM/SF)</option>
+              <option value="Master">Master (SM35+)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Specialità Principale</label>
+            <input type="text" id="ath-form-specialita" class="form-control" placeholder="Es. 100m, 400m, Lungo...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gruppo Allenamento</label>
+            <select id="ath-form-gruppo" class="form-control">
+              <option value="Velocità">Velocità</option>
+              <option value="Velocità prolungata">Velocità prolungata</option>
+              <option value="Mezzofondo">Mezzofondo</option>
+              <option value="Salti">Salti</option>
+              <option value="Lanci">Lanci</option>
+              <option value="Generale">Generale</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Personal Best (PB)</label>
+            <input type="text" id="ath-form-pb" class="form-control" placeholder="Es. 10.58 o 5.82m">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Season Best (SB)</label>
+            <input type="text" id="ath-form-sb" class="form-control" placeholder="Es. 10.64">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note Tecniche & Obiettivi</label>
+          <textarea id="ath-form-note" class="form-control" rows="2" placeholder="Sensazioni, punti di forza, note mediche..."></textarea>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="button" class="btn-icon-subtle btn-close-modal" style="flex: 1;">Annulla</button>
+          <button type="submit" class="btn-action" style="flex: 2; justify-content: center;">Salva Atleta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: NUOVA SCHEDA ALLENAMENTO
+       ======================================================================= -->
+  <div id="modal-workout" class="modal-overlay">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title">Nuova Scheda Allenamento</h3>
+        <button class="btn-icon-subtle btn-close-modal">✕</button>
+      </div>
+      <form id="form-workout">
+        <div class="form-group">
+          <label class="form-label">Titolo Sessione / Allenamento</label>
+          <input type="text" id="wo-form-titolo" class="form-control" required placeholder="Es. Lavoro Lattacido 3x300m">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Data</label>
+            <input type="date" id="wo-form-data" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gruppo Target</label>
+            <select id="wo-form-gruppo" class="form-control">
+              <option value="Velocità">Velocità</option>
+              <option value="Velocità prolungata">Velocità prolungata</option>
+              <option value="Mezzofondo">Mezzofondo</option>
+              <option value="Salti">Salti</option>
+              <option value="Lanci">Lanci</option>
+              <option value="Tutti">Tutti</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Struttura Esercizi & Ripetute</label>
+          <textarea id="wo-form-struttura" class="form-control" rows="3" required placeholder="Es. Riscaldamento 20' + 4 allunghi + 3x300m rec. 6' al 95% + defaticamento"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note & Obiettivi Tecnici</label>
+          <textarea id="wo-form-note" class="form-control" rows="2" placeholder="Indicazioni per gli atleti..."></textarea>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="button" class="btn-icon-subtle btn-close-modal" style="flex: 1;">Annulla</button>
+          <button type="submit" class="btn-action" style="flex: 2; justify-content: center;">Salva Scheda</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: NUOVA SCHEDA POTENZIAMENTO
+       ======================================================================= -->
+  <div id="modal-strength-workout" class="modal-overlay">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title">Nuova Scheda Potenziamento FIDAL</h3>
+        <button class="btn-icon-subtle btn-close-modal">✕</button>
+      </div>
+      <form id="form-strength-workout">
+        <div class="form-group">
+          <label class="form-label">Titolo Scheda Potenziamento</label>
+          <input type="text" id="swo-form-titolo" class="form-control" required placeholder="Es. Forza Esplosiva e Balzi Velocisti">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gruppo Target / Specialità</label>
+          <select id="swo-form-gruppo" class="form-control">
+            <option value="Velocità">Velocità & Ostacoli</option>
+            <option value="Salti">Salti</option>
+            <option value="Mezzofondo">Mezzofondo & Fondo</option>
+            <option value="Lanci">Lanci</option>
+            <option value="Generale">Generale / Prevenzione</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Esercizi e Serie (un esercizio per riga)</label>
+          <textarea id="swo-form-esercizi" class="form-control" rows="4" required placeholder="Es.:&#10;1. Mezzo Squat 4x4 @ 75% rec. 3'&#10;2. Power Clean 4x3 @ 80kg rec. 2.5'&#10;3. Nordic Hamstring Curl 3x6 rec. 90s&#10;4. Balzi tra 5 ostacoli 4 serie"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note & Obiettivi Tecnici</label>
+          <textarea id="swo-form-note" class="form-control" rows="2" placeholder="Indicazioni per gli atleti..."></textarea>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="button" class="btn-icon-subtle btn-close-modal" style="flex: 1;">Annulla</button>
+          <button type="submit" class="btn-action" style="flex: 2; justify-content: center; background: linear-gradient(135deg, #f97316, #ea580c);">Salva Scheda</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: NUOVO TIPO DI ALLENAMENTO / DISTANZA CRONOMETRO
+       ======================================================================= -->
+  <div id="modal-add-chrono-event" class="modal-overlay">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="card-header">
+        <h3 class="card-title">➕ Nuovo Tipo di Allenamento / Distanza</h3>
+        <button class="btn-icon-subtle btn-close-modal">✕</button>
+      </div>
+      <form id="form-add-chrono-event">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 14px;">
+          Inserisci il nome del nuovo tipo di allenamento, ripetuta o prova (es. <em>150m</em>, <em>500m</em>, <em>Staffetta 4x100m</em>, <em>Salto con l'Asta</em>). Verrà salvato permanentemente nella lista per utilizzi futuri.
+        </p>
+        <div class="form-group">
+          <label class="form-label" for="input-new-event-name">Nome Allenamento / Distanza / Prova</label>
+          <input type="text" id="input-new-event-name" class="form-control" required 
+                 placeholder="Es. 150m Lanciati o 5x80m Ostacoli">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="select-new-event-category">Gruppo / Categoria (Opzionale)</label>
+          <select id="select-new-event-category" class="form-control">
+            <option value="Velocità">Velocità & Sprint</option>
+            <option value="Velocità prolungata">Velocità prolungata</option>
+            <option value="Mezzofondo">Mezzofondo & Fondo</option>
+            <option value="Ostacoli">Ostacoli</option>
+            <option value="Salti">Salti</option>
+            <option value="Lanci">Lanci</option>
+            <option value="Personalizzato" selected>Personalizzato / Test</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <button type="button" class="btn-icon-subtle btn-close-modal" style="flex: 1;">Annulla</button>
+          <button type="submit" class="btn-action" style="flex: 2; justify-content: center; background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+            💾 Salva e Seleziona
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL: GUIDA INSTALLAZIONE PWA (IPHONE & ANDROID)
+       ======================================================================= -->
+  <div id="modal-install-guide" class="modal-overlay">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title">📱 Come installare l'App</h3>
+        <button class="btn-icon-subtle btn-close-modal">✕</button>
+      </div>
+
+      <!-- Selettore Sistema Operativo -->
+      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+        <button id="tab-guide-ios" class="btn-icon-subtle active" style="flex: 1; padding: 10px; font-weight: 700; background: var(--accent-blue); color: #fff;">🍎 iPhone & iPad</button>
+        <button id="tab-guide-android" class="btn-icon-subtle" style="flex: 1; padding: 10px; font-weight: 700;">🤖 Android</button>
+      </div>
+
+      <!-- Guida iOS -->
+      <div id="guide-content-ios" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+        <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <li>Apri questa pagina in <strong>Safari</strong> sul tuo iPhone o iPad.</li>
+          <li>Tocca il pulsante di <strong>Condivisione</strong> di Apple (l'icona del quadrato con la freccia verso l'alto <span style="font-size:1.2rem;">⬆️</span> in basso al centro su iPhone, in alto a destra su iPad).</li>
+          <li>Scorri il menu e tocca <strong>"Aggiungi alla schermata Home"</strong>.</li>
+          <li>Conferma toccando <strong>"Aggiungi"</strong> in alto a destra.</li>
+        </ol>
+        <div style="margin-top: 14px; padding: 12px; background: rgba(56, 189, 248, 0.1); border-radius: var(--radius-md); border: 1px solid rgba(56, 189, 248, 0.3);">
+          ✨ L'icona apparirà sulla schermata principale e si aprirà a schermo intero funzionando anche senza internet!
+        </div>
+      </div>
+
+      <!-- Guida Android -->
+      <div id="guide-content-android" style="display: none; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+        <div id="android-install-banner-box" style="display: none; margin-bottom: 14px;">
+          <button id="btn-trigger-android-install" class="btn-action" style="width: 100%; justify-content: center; height: 50px; font-size: 1rem; background: linear-gradient(135deg, #10b981, #059669);">
+            📲 Tocca qui per installare subito su Android
+          </button>
+        </div>
+        <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <li>Apri questa pagina in <strong>Google Chrome</strong> o <strong>Samsung Internet</strong> sul tuo smartphone o tablet Android.</li>
+          <li>Tocca il menu con i <strong>3 puntini verticali</strong> (<code>⋮</code>) in alto a destra (oppure le tre linee in basso su Samsung).</li>
+          <li>Tocca la voce <strong>"Installa applicazione"</strong> (oppure <strong>"Aggiungi a schermata Home"</strong>).</li>
+          <li>Conferma toccando <strong>"Installa"</strong>.</li>
+        </ol>
+        <div style="margin-top: 14px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.3);">
+          🤖 Su Android l'app viene registrata direttamente nel cassetto delle applicazioni, con supporto a schermo intero e funzionamento 100% offline.
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; text-align: right;">
+        <button class="btn-action btn-close-modal" style="width: 100%; justify-content: center;">Ho capito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifiche -->
+  <div id="app-toast" class="toast">Notifica</div>
+
+  <!-- Script dell'applicazione -->
+  <script src="./js/audio.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/stopwatch.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
